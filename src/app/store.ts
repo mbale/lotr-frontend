@@ -1,10 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import movementSlice from 'movement/slice';
 
+const reducer = combineReducers({
+  movements: movementSlice.reducer,
+});
+
+export type RootState = ReturnType<typeof reducer>
+
 const store = configureStore({
-  reducer: {
-    movements: movementSlice.reducer,
-  },
+  reducer,
 });
 
 export default store;

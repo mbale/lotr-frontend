@@ -1,15 +1,18 @@
 import { createSlice, CaseReducer, PayloadAction } from '@reduxjs/toolkit';
+import { StepsOutcome } from 'shared/dto';
 
 /*
 ** State
 */
 
-type InitialState = {
-  steps: string
+export type InitialState = {
+  steps: string;
+  outcome: StepsOutcome
 }
 
 const initialState: InitialState = {
   steps: null,
+  outcome: null,
 };
 
 /*
@@ -23,11 +26,19 @@ const setStep
   state.steps = steps;
 };
 
+const setOutcome
+: CaseReducer<InitialState, PayloadAction<{ outcome: StepsOutcome }>> = (state, action) => {
+  const { outcome } = action.payload;
+
+  state.outcome = outcome;
+};
+
 const movementSlice = createSlice({
   name: 'movement',
   initialState,
   reducers: {
     setStep,
+    setOutcome,
   },
 });
 

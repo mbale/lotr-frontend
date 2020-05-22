@@ -3,7 +3,7 @@ import ControlBox from 'movement/control/box';
 
 const Index = () => {
   return (
-    <div>
+    <div className="flex flex-col md:flex-row md:justify-center">
       <ControlBox />
     </div>
   );

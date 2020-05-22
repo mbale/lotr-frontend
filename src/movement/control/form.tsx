@@ -3,29 +3,45 @@ import { Button, Input, Form } from 'antd';
 import { useDispatch } from 'react-redux';
 import movementSlice from 'movement/slice';
 import checkStepsInputFormat from 'shared/validation';
+import { StepsAPIResponse } from 'shared/dto';
 
 const { TextArea } = Input;
 const { Item: FormItem } = Form;
 
-type ControlFormProps = {
-  loading?: boolean
-};
-
-const ControlForm = ({ loading } : ControlFormProps) => {
+const ControlForm = () => {
   const dispatch = useDispatch();
 
-  const onFinish = ({ steps }: { steps: string }) => {
+  const onFinish = async ({ steps }: { steps: string }) => {
     // format: 's,v,w'
     dispatch(
       movementSlice.actions.setStep({
         steps,
       }),
     );
+
+    // TODO: env variables
+    const url = new URL(`http://localhost:8080/api/steps?steps=${steps}`);
+    const response = await fetch(
+      url.toString(),
+    );
+
+    const data: StepsAPIResponse = await response.json();
+
+    // update store with step results
+    if (data.outcome) {
+      const { outcome } = data;
+
+      dispatch(
+        movementSlice.actions.setOutcome({
+          outcome,
+        }),
+      );
+    }
   };
 
   return (
     <Form
-      name="asd"
+      name="movements"
       className="font-sans"
       onFinish={onFinish}
     >
@@ -55,10 +71,8 @@ const ControlForm = ({ loading } : ControlFormProps) => {
         <TextArea placeholder="n,s,e,w" />
       </FormItem>
       <FormItem>
-        <Button type="primary" loading={loading} htmlType="submit">
-          {
-            loading ? 'Checking..' : 'Send'
-          }
+        <Button type="primary" htmlType="submit">
+          Send
         </Button>
       </FormItem>
     </Form>

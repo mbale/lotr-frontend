@@ -39,7 +39,6 @@ export default async (
       }
     });
 
-
     // check for out of bonds = falls
     const outOfBondRow = position.rowIndex > middleEarthMap.length;
 
@@ -76,15 +75,12 @@ export default async (
       case MapObject.Doom:
         outcome = StepsOutcome.RingDestroyed;
         break;
-      case MapObject.Nothing:
-        outcome = StepsOutcome.Nothing;
-        break;
       case MapObject.Orc:
         outcome = StepsOutcome.GoodbyeFrodo;
         break;
       default:
         // just in case
-        outcome = StepsOutcome.Fall;
+        outcome = StepsOutcome.Nothing;
         break;
     }
 

@@ -9,12 +9,12 @@
  * @enum {number}
  */
 export enum StepsOutcome {
-  RingDestroyed = 'RingDestroyed',
-  GoodbyeFrodo = 'GoodbyeFrodo',
-  Fall = 'Fall',
-  Nothing = 'Nothing',
+  RingDestroyed = 'Ring is destroyed',
+  GoodbyeFrodo = 'Frodo is dead',
+  Fall = 'Frodo is off the globe',
+  Nothing = 'Frodo is in zzzz (nothing happened)',
   // when steps are in invalid state e.g badly formed request from frontend
-  BlackSpeech = 'BlackSpeech'
+  BlackSpeech = 'What language is that, Black Speech?'
 }
 
 /**
