@@ -25,7 +25,7 @@ type LandingLayoutProps = {
 const LandingLayout = ({ children }: LandingLayoutProps) => (
   <Layout>
     <Header />
-    <Content className="px-5 py-8">
+    <Content>
       { children }
     </Content>
   </Layout>

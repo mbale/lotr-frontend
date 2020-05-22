@@ -1,4 +1,5 @@
 import React from 'react';
+import ControlBox from 'movement/control/box';
 
 const map = [
   ['-', '-', '-', 'O', '-', '-', '-', '-', '-', 'O'],
@@ -15,7 +16,9 @@ const map = [
 
 const Index = () => {
   return (
-    <div />
+    <div>
+      <ControlBox />
+    </div>
   );
 };
 
