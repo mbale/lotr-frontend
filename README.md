@@ -12,6 +12,8 @@ yarn install
 yarn dev
 ```
 
+Hit http://localhost:8080/
+
 ## Lint
 
 ```bash
