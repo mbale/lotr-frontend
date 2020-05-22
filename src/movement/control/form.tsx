@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Input, Form } from 'antd';
 import { useDispatch } from 'react-redux';
-import movementSlice from 'movement/slice'
+import movementSlice from 'movement/slice';
+import checkStepsInputFormat from 'shared/validation';
 
 const { TextArea } = Input;
 const { Item: FormItem } = Form;
@@ -42,9 +43,7 @@ const ControlForm = ({ loading } : ControlFormProps) => {
               }
 
               // and if it's in correct state
-              const isValid = new RegExp(
-                /^[n,s,w,e]*([,]?[nswe])$/,
-              ).test(value);
+              const isValid = checkStepsInputFormat(value);
 
               if (!isValid) {
                 throw new Error('Invalid format for movements');
