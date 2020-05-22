@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     node: true,
+    jest: true,
   },
   plugins: [
     '@typescript-eslint',
@@ -19,6 +20,11 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'import/no-extraneous-dependencies': [
+      'error', {
+        devDependencies: true,
+      },
+    ],
     'import/extensions': ['error', 'ignorePackages', {
       js: 'never',
       jsx: 'never',

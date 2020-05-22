@@ -1,13 +1,28 @@
+const { defaults: tsjPreset } = require('ts-jest/presets');
+const { compilerOptions } = require('./tsconfig.json');
+
+const { baseUrl } = compilerOptions;
+
 module.exports = {
-  roots: ['<rootDir>'],
-  moduleFileExtensions: ['js', 'ts', 'tsx', 'json'],
-  setupFiles: ['<rootDir>/enzyme.setup.js'],
-  testPathIgnorePatterns: ['<rootDir>[/\\\\](build|docs|node_modules|.next)[/\\\\]'],
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(ts|tsx)$'],
-  testEnvironment: ['jsdom'],
-  testURL: 'http://localhost',
-  transform: {
-    '^.+\\.(ts|tsx)$': 'babel-jest',
+  moduleDirectories: [
+    baseUrl,
+    'node_modules',
+  ],
+  preset: 'ts-jest/presets/js-with-ts',
+  testEnvironment: 'node',
+  moduleFileExtensions: ['ts', 'tsx', 'js'],
+  moduleNameMapper: {
+    '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
   },
-  testRegex: '/__tests__/.*\\.(test|spec)\\.tsx?$',
+  transform: {
+    ...tsjPreset.transform // only .ts files will go through jest-ts
+  },
+  testMatch: ['**/*/*.spec.(ts|tsx)'],
+  setupFiles: ['./enzyme.setup.js'],
+  testPathIgnorePatterns: ['./.next/', './node_modules/'],
+  globals: {
+    'ts-jest': {
+      tsConfig: 'tsconfig.jest.json',
+    },
+  },
 };
